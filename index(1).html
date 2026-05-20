@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebXBeam — Smart Marketing. Smarter Systems.</title>
+  <meta name="description" content="WebXBeam is a digital marketing and business optimization agency combining creativity, analytics, and AI automation to help businesses scale smarter and grow faster.">
+  <meta name="keywords" content="digital marketing, AI automation, website development, SEO, South Africa, WebXBeam">
+  <meta name="author" content="WebXBeam">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://webxbeam.com/">
+  <meta property="og:title" content="WebXBeam — Smart Marketing. Smarter Systems.">
+  <meta property="og:description" content="Digital marketing and AI automation agency helping businesses attract customers, increase conversions, and run smarter.">
+  <meta property="og:image" content="https://webxbeam.com/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WebXBeam — Smart Marketing. Smarter Systems.">
+  <meta name="twitter:description" content="Digital marketing and AI automation agency helping businesses grow faster.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://webxbeam.com/">
+
+  <!-- Favicon (inline SVG data URI) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23111'/><text x='16' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='900' font-size='18' fill='%23fff'>W<tspan fill='%23801818'>X</tspan></text></svg>">
+
+  <!-- Tabler Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.7.0/dist/tabler-icons.min.css">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    .site{background:#111;color:#fff;font-family:'Inter',system-ui,sans-serif;width:100%}
+
+    /* NAV */
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 40px;border-bottom:0.5px solid #2a2a2a;background:#0d0d0d;position:sticky;top:0;z-index:100}
+    .nav-logo{font-size:20px;font-weight:800;letter-spacing:-0.5px;color:#fff;cursor:pointer}
+    .nav-logo .x{color:#801818}
+    .nav-links{display:flex;gap:28px;font-size:13px}
+    .nav-links a{color:#777;text-decoration:none;cursor:pointer;transition:color 0.2s}
+    .nav-links a:hover{color:#fff}
+    .nav-links a.active{color:#fff}
+    .nav-cta{background:#801818;color:#fff;border:none;padding:9px 22px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:0.2px}
+
+    /* TAB BAR */
+    .tab-bar{display:flex;border-bottom:0.5px solid #1e1e1e;background:#0d0d0d;padding:0 40px}
+    .tab{padding:13px 20px;font-size:12px;color:#444;cursor:pointer;border-bottom:2px solid transparent;letter-spacing:0.5px;text-transform:uppercase;transition:color 0.2s}
+    .tab:hover{color:#aaa}
+    .tab.active{color:#801818;border-bottom-color:#801818}
+
+    /* PAGE SHOW/HIDE */
+    .page{display:none}.page.active{display:block}
+
+    /* SHARED */
+    .pill{display:inline-block;background:#1a0a0a;border:0.5px solid #3a1515;color:#801818;font-size:11px;letter-spacing:1.5px;padding:5px 14px;border-radius:20px;margin-bottom:24px;text-transform:uppercase}
+    .section-label{font-size:11px;color:#801818;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+    .section-title{font-size:30px;font-weight:800;letter-spacing:-1px;color:#fff;margin-bottom:10px;line-height:1.1}
+    .section-sub{font-size:14px;color:#555;line-height:1.6;margin-bottom:36px}
+    .accent{color:#801818}
+
+    .cta-strip{background:#801818;padding:64px 40px;text-align:center}
+    .cta-strip h2{font-size:30px;font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:10px}
+    .cta-strip p{font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:24px}
+    .cta-strip button{background:#fff;color:#801818;border:none;padding:13px 30px;border-radius:8px;font-size:14px;font-weight:800;cursor:pointer}
+
+    /* FOOTER */
+    .footer{background:#080808;padding:36px 40px;border-top:0.5px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-size:14px;font-weight:800;color:#fff;letter-spacing:-0.3px}
+    .footer-logo .x{color:#801818}
+    .footer-tagline{font-size:12px;color:#333}
+    .footer-links{display:flex;gap:20px;font-size:12px;color:#333;cursor:pointer}
+    .footer-links span:hover{color:#777}
+    .powered{background:#050505;padding:14px 40px;text-align:center;border-top:0.5px solid #151515}
+    .powered p{font-size:11px;color:#2a2a2a;letter-spacing:1px;text-transform:uppercase}
+    .powered p .wx{color:#fff;font-weight:700}
+    .powered p .xx{color:#801818;font-weight:700}
+    .powered p .xb{color:#fff;font-weight:700}
+
+    /* ══════════════════════════════
+       HOMEPAGE
+    ══════════════════════════════ */
+    .hero{padding:96px 40px 72px;text-align:center;border-bottom:0.5px solid #1a1a1a;background:#0d0d0d}
+    .hero h1{font-size:58px;font-weight:900;line-height:1.0;letter-spacing:-2.5px;max-width:660px;margin:0 auto 22px;color:#fff}
+    .hero p{font-size:16px;color:#666;max-width:460px;margin:0 auto 36px;line-height:1.7}
+    .hero-btns{display:flex;gap:12px;justify-content:center}
+    .btn-primary{background:#801818;color:#fff;border:none;padding:14px 30px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer}
+    .btn-ghost{background:transparent;color:#aaa;border:0.5px solid #2a2a2a;padding:14px 30px;border-radius:8px;font-size:14px;cursor:pointer}
+    .btn-ghost:hover{border-color:#555;color:#fff}
+
+    .stats-bar{display:grid;grid-template-columns:repeat(3,1fr);border-top:0.5px solid #1a1a1a;border-bottom:0.5px solid #1a1a1a}
+    .stat{padding:32px 40px;text-align:center;border-right:0.5px solid #1a1a1a}
+    .stat:last-child{border-right:none}
+    .stat-num{font-size:38px;font-weight:900;color:#fff;letter-spacing:-2px;line-height:1}
+    .stat-num .acc{color:#801818}
+    .stat-lbl{font-size:11px;color:#444;margin-top:6px;text-transform:uppercase;letter-spacing:1px}
+
+    .home-services{padding:72px 40px;border-bottom:0.5px solid #1a1a1a}
+    .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#1a1a1a;border:0.5px solid #1a1a1a;border-radius:12px;overflow:hidden;margin-top:40px}
+    .svc-card{background:#111;padding:28px 24px;transition:background 0.2s;cursor:pointer}
+    .svc-card:hover{background:#161616}
+    .svc-ic{font-size:22px;color:#801818;margin-bottom:14px}
+    .svc-t{font-size:14px;font-weight:700;color:#ddd;margin-bottom:8px}
+    .svc-d{font-size:12px;color:#555;line-height:1.6}
+
+    .home-process{background:#0a0a0a;padding:72px 40px;border-top:0.5px solid #1a1a1a;border-bottom:0.5px solid #1a1a1a}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+    .step{position:relative}
+    .step-num{width:42px;height:42px;background:#141414;border:0.5px solid #801818;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#801818;margin-bottom:16px}
+    .step-t{font-size:13px;font-weight:700;color:#ccc;margin-bottom:6px}
+    .step-d{font-size:12px;color:#444;line-height:1.6}
+
+    .home-why{padding:72px 40px;border-bottom:0.5px solid #1a1a1a}
+    .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#1a1a1a;border:0.5px solid #1a1a1a;border-radius:12px;overflow:hidden;margin-top:40px}
+    .why-card{background:#0d0d0d;padding:32px 28px}
+    .why-icon{font-size:22px;color:#801818;margin-bottom:14px}
+    .why-t{font-size:15px;font-weight:700;color:#ddd;margin-bottom:8px}
+    .why-d{font-size:13px;color:#555;line-height:1.6}
+
+    .testimonial{background:#0a0a0a;padding:72px 40px;border-top:0.5px solid #1a1a1a;border-bottom:0.5px solid #1a1a1a;text-align:center}
+    .quote{font-size:22px;font-weight:700;color:#ddd;letter-spacing:-0.5px;max-width:580px;margin:0 auto 24px;line-height:1.4}
+    .quote-attr{font-size:13px;color:#444}
+
+    .home-pricing{padding:72px 40px;border-bottom:0.5px solid #1a1a1a}
+    .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+    .plan{background:#0d0d0d;border:0.5px solid #222;border-radius:12px;padding:28px 24px}
+    .plan.feat{border-color:#801818;background:#120808}
+    .plan-badge{font-size:10px;background:#801818;color:#fff;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px}
+    .plan-name{font-size:15px;font-weight:800;color:#fff;margin-bottom:4px}
+    .plan-price{font-size:30px;font-weight:900;color:#fff;letter-spacing:-1px;margin:12px 0 4px}
+    .plan-price span{font-size:13px;font-weight:400;color:#444}
+    .plan-desc{font-size:12px;color:#444;margin-bottom:20px;line-height:1.5}
+    .plan-feat{display:flex;align-items:center;gap:8px;font-size:12px;color:#666;margin-bottom:10px}
+    .plan-feat i{color:#801818;font-size:13px}
+    .plan-btn{width:100%;padding:11px;border-radius:8px;font-size:13px;font-weight:700;margin-top:20px;cursor:pointer;border:0.5px solid #2a2a2a;background:transparent;color:#888}
+    .plan.feat .plan-btn{background:#801818;border-color:#801818;color:#fff}
+
+    /* ══════════════════════════════
+       ABOUT
+    ══════════════════════════════ */
+    .about-hero{padding:80px 40px 60px;border-bottom:0.5px solid #1e1e1e;background:#0d0d0d}
+    .about-hero h1{font-size:44px;font-weight:900;letter-spacing:-1.5px;line-height:1.1;max-width:580px;margin-bottom:18px}
+    .about-hero p{font-size:15px;color:#777;line-height:1.7;max-width:520px}
+    .about-split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#1e1e1e;border-top:0.5px solid #1e1e1e;border-bottom:0.5px solid #1e1e1e}
+    .about-panel{background:#111;padding:50px 40px}
+    .about-panel h2{font-size:20px;font-weight:800;color:#fff;margin-bottom:16px;letter-spacing:-0.5px}
+    .about-panel p{font-size:13px;color:#555;line-height:1.8;margin-bottom:14px}
+    .values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:40px;border-bottom:0.5px solid #1e1e1e}
+    .val-card{background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:10px;padding:22px 20px}
+    .val-ic{font-size:20px;color:#801818;margin-bottom:12px}
+    .val-t{font-size:13px;font-weight:700;color:#ccc;margin-bottom:6px}
+    .val-d{font-size:12px;color:#444;line-height:1.6}
+    .team-sec{padding:50px 40px;border-bottom:0.5px solid #1e1e1e}
+    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+    .team-card{background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:10px;padding:24px;text-align:center}
+    .avatar{width:52px;height:52px;border-radius:50%;background:#1a0808;border:0.5px solid #3a1515;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#801818;margin:0 auto 14px}
+    .team-name{font-size:13px;font-weight:700;color:#ccc}
+    .team-role{font-size:11px;color:#444;margin-top:4px;line-height:1.5}
+    .clients-bar{padding:40px;background:#080808;border-bottom:0.5px solid #1e1e1e;text-align:center}
+    .clients-lbl{font-size:10px;color:#333;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px}
+    .clients-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .chip{background:#111;border:0.5px solid #1e1e1e;border-radius:6px;padding:8px 16px;font-size:11px;font-weight:600;color:#333;letter-spacing:0.5px}
+
+    /* ══════════════════════════════
+       SERVICES
+    ══════════════════════════════ */
+    .svc-hero{padding:80px 40px 60px;border-bottom:0.5px solid #1e1e1e;background:#0d0d0d}
+    .svc-hero h1{font-size:44px;font-weight:900;letter-spacing:-1.5px;max-width:560px;margin-bottom:18px}
+    .svc-hero p{font-size:15px;color:#777;line-height:1.7;max-width:500px}
+    .svc-full{border-top:0.5px solid #1e1e1e}
+    .svc-row{display:grid;grid-template-columns:1fr 1.6fr;gap:1px;background:#1a1a1a;border-bottom:0.5px solid #1a1a1a}
+    .svc-row.flip{grid-template-columns:1.6fr 1fr}
+    .svc-label-col{background:#0a0a0a;padding:44px 36px;display:flex;flex-direction:column;justify-content:center}
+    .svc-num{font-size:52px;font-weight:900;color:#1a1a1a;line-height:1;margin-bottom:8px;letter-spacing:-2px}
+    .svc-name{font-size:17px;font-weight:800;color:#fff;margin-bottom:10px}
+    .svc-short{font-size:13px;color:#444;line-height:1.6}
+    .svc-detail-col{background:#111;padding:44px 36px}
+    .svc-detail-col h3{font-size:11px;font-weight:700;color:#801818;margin-bottom:16px;text-transform:uppercase;letter-spacing:1.5px}
+    .svc-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .svc-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#666;line-height:1.5}
+    .svc-list li i{color:#801818;font-size:13px;margin-top:1px;flex-shrink:0}
+
+    /* ══════════════════════════════
+       CONTACT
+    ══════════════════════════════ */
+    .contact-hero{padding:70px 40px 50px;border-bottom:0.5px solid #1e1e1e;background:#0d0d0d}
+    .contact-hero h1{font-size:40px;font-weight:900;letter-spacing:-1.5px;margin-bottom:14px}
+    .contact-hero p{font-size:15px;color:#777;line-height:1.7;max-width:480px}
+    .contact-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:1px;background:#1a1a1a;border-bottom:0.5px solid #1a1a1a}
+    .contact-info{background:#0a0a0a;padding:50px 40px}
+    .contact-info h2{font-size:17px;font-weight:800;color:#fff;margin-bottom:28px}
+    .info-item{display:flex;align-items:flex-start;gap:14px;margin-bottom:26px}
+    .info-icon{width:38px;height:38px;background:#141414;border:0.5px solid #2a2a2a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#801818;flex-shrink:0}
+    .info-lbl{font-size:10px;color:#333;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+    .info-val{font-size:13px;color:#666;line-height:1.5}
+    .audit-box{background:#120808;border:0.5px solid #801818;border-radius:10px;padding:22px;margin-top:28px}
+    .audit-box p{font-size:12px;color:#7a3030;line-height:1.6;margin-bottom:14px}
+    .audit-box button{background:#801818;color:#fff;border:none;padding:10px 18px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;width:100%}
+    .contact-form-col{background:#111;padding:50px 40px}
+    .contact-form-col h2{font-size:17px;font-weight:800;color:#fff;margin-bottom:28px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+    .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+    .form-group label{font-size:10px;color:#444;text-transform:uppercase;letter-spacing:1px}
+    .form-group input,.form-group select,.form-group textarea{background:#0d0d0d;border:0.5px solid #222;border-radius:7px;padding:11px 13px;font-size:13px;color:#ccc;outline:none;font-family:inherit;width:100%}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#801818}
+    .form-group select{color:#ccc;appearance:none;cursor:pointer;background:#0d0d0d}
+    .form-group select option{background:#111;color:#ccc}
+    .form-group textarea{resize:none;height:96px;line-height:1.6}
+    .services-check{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+    .chk-item{display:flex;align-items:center;gap:8px;cursor:pointer}
+    .chk-item input[type=checkbox]{accent-color:#801818;width:13px;height:13px;cursor:pointer}
+    .chk-item span{font-size:12px;color:#666}
+    .submit-row{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+    .submit-note{font-size:11px;color:#333}
+    .submit-btn{background:#801818;color:#fff;border:none;padding:12px 26px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px}
+    .success-msg{display:none;background:#120808;border:0.5px solid #801818;border-radius:10px;padding:28px;text-align:center;margin-top:20px}
+    .success-msg i{font-size:28px;color:#801818;margin-bottom:10px;display:block}
+    .success-msg .sm-title{font-size:15px;font-weight:700;color:#ddd;margin-bottom:8px}
+    .success-msg .sm-sub{font-size:13px;color:#555}
+
+    /* ══════════════════════════════
+       HOME CLIENTS
+    ══════════════════════════════ */
+    .home-clients{padding:72px 40px;border-bottom:0.5px solid #1a1a1a;background:#0a0a0a}
+    .client-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+    .client-card{background:#111;border:0.5px solid #1e1e1e;border-radius:12px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;transition:border-color 0.2s}
+    .client-card:hover{border-color:#3a1515}
+    .client-monogram{width:48px;height:48px;border-radius:10px;background:#1a0808;border:0.5px solid #3a1515;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#801818;letter-spacing:-0.5px;flex-shrink:0}
+    .client-name{font-size:14px;font-weight:800;color:#ddd;letter-spacing:-0.3px}
+    .client-tag{display:inline-block;background:#141414;border:0.5px solid #2a2a2a;border-radius:20px;font-size:10px;color:#555;padding:4px 11px;letter-spacing:0.8px;text-transform:uppercase;width:fit-content}
+
+    /* ══════════════════════════════
+       MOBILE RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width: 768px) {
+      .nav{padding:14px 20px}
+      .nav-links{display:none}
+      .tab-bar{padding:0 20px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+      .tab{white-space:nowrap;padding:12px 14px;font-size:11px}
+      .hero{padding:60px 20px 48px}
+      .hero h1{font-size:36px;letter-spacing:-1.5px}
+      .hero-btns{flex-direction:column;align-items:center}
+      .stats-bar{grid-template-columns:1fr}
+      .stat{border-right:none;border-bottom:0.5px solid #1a1a1a}
+      .stat:last-child{border-bottom:none}
+      .home-services,.home-process,.home-why,.home-pricing,.testimonial,.home-clients{padding:48px 20px}
+      .client-cards{grid-template-columns:1fr}
+      .svc-grid{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr 1fr}
+      .why-grid{grid-template-columns:1fr}
+      .plans{grid-template-columns:1fr}
+      .about-hero,.svc-hero,.contact-hero{padding:50px 20px 36px}
+      .about-split{grid-template-columns:1fr}
+      .about-panel{padding:32px 20px}
+      .values-grid{grid-template-columns:1fr;padding:20px}
+      .team-grid{grid-template-columns:1fr}
+      .clients-bar{padding:24px 20px}
+      .svc-row,.svc-row.flip{grid-template-columns:1fr}
+      .svc-label-col,.svc-detail-col{padding:28px 20px}
+      .contact-layout{grid-template-columns:1fr}
+      .contact-info,.contact-form-col{padding:32px 20px}
+      .form-row{grid-template-columns:1fr}
+      .cta-strip{padding:48px 20px}
+      .footer{flex-direction:column;gap:16px;text-align:center;padding:28px 20px}
+      .footer-links{justify-content:center}
+      .powered{padding:14px 20px}
+    }
+
+    @media (max-width: 480px) {
+      .hero h1{font-size:28px}
+      .steps{grid-template-columns:1fr}
+      .services-check{grid-template-columns:1fr}
+      .submit-row{flex-direction:column;gap:12px;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+
+<div class="site">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-logo" onclick="showPage('home')">Web<span class="x">X</span>Beam</div>
+    <div class="nav-links">
+      <a onclick="showPage('home')" id="nl-home" class="active">Home</a>
+      <a onclick="showPage('about')" id="nl-about">About</a>
+      <a onclick="showPage('services')" id="nl-services">Services</a>
+      <a onclick="showPage('contact')" id="nl-contact">Contact</a>
+    </div>
+    <button class="nav-cta" onclick="showPage('contact')">Free audit ↗</button>
+  </nav>
+
+  <div class="tab-bar">
+    <div class="tab active" onclick="showPage('home')" id="pt-home">Home</div>
+    <div class="tab" onclick="showPage('about')" id="pt-about">About us</div>
+    <div class="tab" onclick="showPage('services')" id="pt-services">Services</div>
+    <div class="tab" onclick="showPage('contact')" id="pt-contact">Contact &amp; booking</div>
+  </div>
+
+  <!-- ═══════════ HOME ═══════════ -->
+  <div class="page active" id="page-home">
+
+    <section class="hero">
+      <div class="pill">Digital growth &amp; automation agency</div>
+      <h1>Where marketing<br>meets <span class="accent">automation.</span></h1>
+      <p>Web<span style="color:#801818">X</span>Beam helps businesses attract customers, increase conversions, and run smarter through AI-powered digital systems.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showPage('contact')">Start growing today</button>
+        <button class="btn-ghost" onclick="showPage('services')">See our services →</button>
+      </div>
+    </section>
+
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-num">3<span class="acc">×</span></div>
+        <div class="stat-lbl">Average ROI increase</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">150<span class="acc">+</span></div>
+        <div class="stat-lbl">Clients served</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">98<span class="acc">%</span></div>
+        <div class="stat-lbl">Client retention rate</div>
+      </div>
+    </div>
+
+    <section class="home-services">
+      <div class="section-label">What we do</div>
+      <div class="section-title">Everything you need<br>to scale smarter</div>
+      <div class="section-sub">From lead generation to full AI automation — six core services, one growth system.</div>
+      <div class="svc-grid">
+        <div class="svc-card" onclick="showPage('services')">
+          <div class="svc-ic"><i class="ti ti-chart-bar" aria-hidden="true"></i></div>
+          <div class="svc-t">Digital marketing &amp; growth</div>
+          <div class="svc-d">SEO, paid ads, social media, and funnels that convert traffic into revenue.</div>
+        </div>
+        <div class="svc-card" onclick="showPage('services')">
+          <div class="svc-ic"><i class="ti ti-device-laptop" aria-hidden="true"></i></div>
+          <div class="svc-t">Custom website development</div>
+          <div class="svc-d">Fast, modern, conversion-focused websites built to rank and sell.</div>
+        </div>
+        <div class="svc-card" onclick="showPage('services')">
+          <div class="svc-ic"><i class="ti ti-eye" aria-hidden="true"></i></div>
+          <div class="svc-t">UI/UX &amp; heatmap analytics</div>
+          <div class="svc-d">We optimize user journeys using real behavioral data and A/B testing.</div>
+        </div>
+        <div class="svc-card" onclick="showPage('services')">
+          <div class="svc-ic"><i class="ti ti-robot" aria-hidden="true"></i></div>
+          <div class="svc-t">AI workflows &amp; automation</div>
+          <div class="svc-d">Chatbots, CRM automation, and onboarding systems that work 24/7.</div>
+        </div>
+        <div class="svc-card" onclick="showPage('services')">
+          <div class="svc-ic"><i class="ti ti-speakerphone" aria-hidden="true"></i></div>
+          <div class="svc-t">Event &amp; campaign marketing</div>
+          <div class="svc-d">End-to-end digital promotion for launches, events, and activations.</div>
+        </div>
+        <div class="svc-card" onclick="showPage('services')">
+          <div class="svc-ic"><i class="ti ti-activity" aria-hidden="true"></i></div>
+          <div class="svc-t">Analytics &amp; reporting</div>
+          <div class="svc-d">Custom dashboards and data-driven decisions at every stage of growth.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-process">
+      <div class="section-label">How it works</div>
+      <div class="section-title">Four steps to growth</div>
+      <div class="section-sub">A clear, proven process from audit to scale.</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-t">Audit &amp; strategy</div>
+          <div class="step-d">We map your current presence and identify the highest-impact growth opportunities.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-t">Build &amp; launch</div>
+          <div class="step-d">Websites, campaigns, and automation systems are built and deployed fast.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-t">Optimize &amp; convert</div>
+          <div class="step-d">We test, track, and refine until conversions improve measurably.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-t">Scale &amp; automate</div>
+          <div class="step-d">AI workflows take over repetitive tasks so your business can grow without friction.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-why">
+      <div class="section-label">Why WebXBeam</div>
+      <div class="section-title">Built different</div>
+      <div class="section-sub">We don't just run ads or build websites. We engineer complete digital growth systems.</div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon"><i class="ti ti-bulb" aria-hidden="true"></i></div>
+          <div class="why-t">Strategy before execution</div>
+          <div class="why-d">Every campaign and build starts with real data and a clear plan — not guesswork or templates.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="ti ti-robot" aria-hidden="true"></i></div>
+          <div class="why-t">AI-first thinking</div>
+          <div class="why-d">We embed automation into everything we build so you get leverage, not just deliverables.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="ti ti-chart-line" aria-hidden="true"></i></div>
+          <div class="why-t">Results are the metric</div>
+          <div class="why-d">We measure success by leads generated, conversions improved, and revenue grown — nothing else.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="ti ti-users" aria-hidden="true"></i></div>
+          <div class="why-t">True partnership</div>
+          <div class="why-d">We work as an extension of your team — transparent, responsive, and invested in your success.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonial">
+      <div class="section-label">Client results</div>
+      <div class="quote">"WebXBeam didn't just redesign our site — they rebuilt our entire customer acquisition system. Leads doubled in 60 days."</div>
+      <div class="quote-attr">— CEO, Hospitality brand · South Africa</div>
+    </section>
+
+    <section class="home-pricing">
+      <div class="section-label">Pricing</div>
+      <div class="section-title">Simple, transparent plans</div>
+      <div class="section-sub">All plans include a free digital audit. No lock-in contracts.</div>
+      <div class="plans">
+        <div class="plan">
+          <div class="plan-name">Starter</div>
+          <div class="plan-price">R4,999<span>/mo</span></div>
+          <div class="plan-desc">For small businesses building their digital foundation.</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Basic business website</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Social media setup</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> SEO basics</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Lead form integration</div>
+          <button class="plan-btn" onclick="showPage('contact')">Get started</button>
+        </div>
+        <div class="plan feat">
+          <div class="plan-badge">Most popular</div>
+          <div class="plan-name">Business Growth</div>
+          <div class="plan-price">R12,999<span>/mo</span></div>
+          <div class="plan-desc">For growing businesses scaling leads and conversions.</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Custom website</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Paid ad campaigns</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Heatmaps &amp; analytics</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Conversion optimization</div>
+          <button class="plan-btn" onclick="showPage('contact')">Get started</button>
+        </div>
+        <div class="plan">
+          <div class="plan-name">Enterprise</div>
+          <div class="plan-price">Custom</div>
+          <div class="plan-desc">Full digital ecosystem with AI automation and ongoing support.</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Full digital strategy</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> AI workflow automation</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> CRM integration</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Advanced dashboards</div>
+          <button class="plan-btn" onclick="showPage('contact')">Talk to us</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-clients">
+      <div class="section-label">Clients we serve</div>
+      <div class="section-title">Trusted by growing businesses</div>
+      <div class="section-sub">From healthcare to agri-tech — we help ambitious businesses across industries grow smarter.</div>
+      <div class="client-cards">
+        <div class="client-card">
+          <div class="client-monogram">FM</div>
+          <div>
+            <div class="client-name">Foot Med Podiatrist Inc</div>
+            <div class="client-tag">Healthcare &amp; medical</div>
+          </div>
+        </div>
+        <div class="client-card">
+          <div class="client-monogram">AG</div>
+          <div>
+            <div class="client-name">Agriden</div>
+            <div class="client-tag">Agriculture &amp; agri-tech</div>
+          </div>
+        </div>
+        <div class="client-card">
+          <div class="client-monogram">AC</div>
+          <div>
+            <div class="client-name">AgriCori</div>
+            <div class="client-tag">Agriculture &amp; agri-tech</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-strip">
+      <h2>Ready to grow your business?</h2>
+      <p>Get a free digital audit — we'll show you exactly where you're leaving money on the table.</p>
+      <button onclick="showPage('contact')">Book your free audit</button>
+    </div>
+  </div>
+
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <div class="page" id="page-about">
+    <section class="about-hero">
+      <div class="pill">About WebXBeam</div>
+      <h1>We build digital ecosystems<br>that <span class="accent">convert.</span></h1>
+      <p>A digital marketing and business optimization agency combining creativity, analytics, and AI automation to help businesses scale smarter and grow faster.</p>
+    </section>
+    <div class="about-split">
+      <div class="about-panel">
+        <h2>Our story</h2>
+        <p>Web<span style="color:#801818">X</span>Beam was founded on a single belief — most businesses leave enormous growth potential untapped because their digital presence doesn't match their ambition.</p>
+        <p>We set out to change that by building a full-service agency that connects marketing strategy directly to technology and AI automation, giving clients a true growth engine — not just a pretty website.</p>
+        <p>Today we work with startups, SMEs, hospitality brands, event organizers, and professional services businesses across Southern Africa and beyond.</p>
+      </div>
+      <div class="about-panel" style="background:#0a0a0a">
+        <h2>Our mission</h2>
+        <p>To help businesses attract more customers, convert more leads, and operate more efficiently through smart marketing, custom technology, and AI-powered automation.</p>
+        <p style="margin-top:24px;font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.5px;line-height:1.3">"Smart marketing.<br>Smarter systems."</p>
+        <p style="margin-top:14px;font-size:11px;color:#333;text-transform:uppercase;letter-spacing:1px">— The Web<span style="color:#801818">X</span>Beam philosophy</p>
+      </div>
+    </div>
+    <div class="values-grid">
+      <div class="val-card"><div class="val-ic"><i class="ti ti-bulb" aria-hidden="true"></i></div><div class="val-t">Strategy first</div><div class="val-d">Every campaign and build starts with data — not guesswork. We operate on evidence.</div></div>
+      <div class="val-card"><div class="val-ic"><i class="ti ti-robot" aria-hidden="true"></i></div><div class="val-t">Automation-driven</div><div class="val-d">We believe the best businesses run systems that generate results even when no one is watching.</div></div>
+      <div class="val-card"><div class="val-ic"><i class="ti ti-users" aria-hidden="true"></i></div><div class="val-t">Client-obsessed</div><div class="val-d">Your growth is our KPI. We measure success by results delivered, not hours logged.</div></div>
+      <div class="val-card"><div class="val-ic"><i class="ti ti-chart-line" aria-hidden="true"></i></div><div class="val-t">Always optimizing</div><div class="val-d">Continuous testing, analysis, and improvement are built into everything we do.</div></div>
+    </div>
+    <div class="team-sec">
+      <div class="section-label">The team</div>
+      <div class="section-title">People behind the growth</div>
+      <div class="section-sub">A lean, expert team of marketers, developers, designers, and AI specialists.</div>
+      <div class="team-grid">
+        <div class="team-card"><div class="avatar">WXB</div><div class="team-name">Growth strategy</div><div class="team-role">Lead generation · Paid media · SEO</div></div>
+        <div class="team-card"><div class="avatar" style="color:#1D9E75;border-color:#0d3a2a;background:#0a1f17">WXB</div><div class="team-name">Development</div><div class="team-role">Websites · E-commerce · Automation</div></div>
+        <div class="team-card"><div class="avatar" style="color:#7F77DD;border-color:#2a2660;background:#14123a">WXB</div><div class="team-name">Design &amp; UX</div><div class="team-role">UI/UX · Heatmaps · Conversion design</div></div>
+      </div>
+    </div>
+    <div class="clients-bar">
+      <div class="clients-lbl">Industries we serve</div>
+      <div class="clients-row">
+        <div class="chip">Retail</div><div class="chip">Hospitality</div><div class="chip">Real estate</div><div class="chip">E-commerce</div><div class="chip">Professional services</div><div class="chip">Events</div><div class="chip">Medical</div><div class="chip">Startups</div>
+      </div>
+    </div>
+    <div class="cta-strip">
+      <h2>Ready to work with us?</h2>
+      <p>Book a free strategy call and we'll show you exactly where you can grow.</p>
+      <button onclick="showPage('contact')">Book a free audit →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════ SERVICES ═══════════ -->
+  <div class="page" id="page-services">
+    <section class="svc-hero">
+      <div class="pill">Our services</div>
+      <h1>Six ways we help<br>your business <span class="accent">grow</span></h1>
+      <p>Each service is designed to work alone or together as a complete digital growth system.</p>
+    </section>
+    <div class="svc-full">
+      <div class="svc-row">
+        <div class="svc-label-col"><div class="svc-num">01</div><div class="svc-name">Digital marketing &amp; growth</div><div class="svc-short">Data-driven campaigns that attract the right customers and turn them into buyers.</div></div>
+        <div class="svc-detail-col"><h3>What's included</h3><ul class="svc-list"><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Social media marketing &amp; management</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Paid advertising (Meta, Google, LinkedIn)</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>SEO optimization &amp; keyword strategy</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Content strategy &amp; brand positioning</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Sales funnel creation &amp; conversion optimization</li></ul></div>
+      </div>
+      <div class="svc-row flip">
+        <div class="svc-detail-col"><h3>What's included</h3><ul class="svc-list"><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Business websites &amp; landing pages</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>E-commerce stores &amp; booking systems</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Membership portals &amp; portfolios</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Mobile-first responsive design</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Speed optimization &amp; Core Web Vitals</li></ul></div>
+        <div class="svc-label-col"><div class="svc-num">02</div><div class="svc-name">Custom website development</div><div class="svc-short">Fast, modern, conversion-focused websites built to rank and sell.</div></div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-label-col"><div class="svc-num">03</div><div class="svc-name">UI/UX &amp; heatmap analytics</div><div class="svc-short">We improve how users experience your site using real behavioral data.</div></div>
+        <div class="svc-detail-col"><h3>What's included</h3><ul class="svc-list"><li><i class="ti ti-arrow-right" aria-hidden="true"></i>UX audits &amp; user journey mapping</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Heatmap &amp; click tracking implementation</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Session recordings &amp; scroll depth analysis</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>A/B testing &amp; conversion layout redesigns</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Accessibility &amp; performance improvements</li></ul></div>
+      </div>
+      <div class="svc-row flip">
+        <div class="svc-detail-col"><h3>What's included</h3><ul class="svc-list"><li><i class="ti ti-arrow-right" aria-hidden="true"></i>AI chatbots &amp; lead qualification</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>CRM automation &amp; follow-up sequences</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Client onboarding automation</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Workflow integrations &amp; internal systems</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>AI-powered reporting dashboards</li></ul></div>
+        <div class="svc-label-col"><div class="svc-num">04</div><div class="svc-name">AI workflows &amp; automation</div><div class="svc-short">Let AI handle the repetitive work so your team focuses on what matters.</div></div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-label-col"><div class="svc-num">05</div><div class="svc-name">Event &amp; campaign marketing</div><div class="svc-short">Full digital support for launches, activations, and live events.</div></div>
+        <div class="svc-detail-col"><h3>What's included</h3><ul class="svc-list"><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Event landing pages &amp; ticketing campaigns</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Social media promotion &amp; paid targeting</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Email &amp; WhatsApp campaign management</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Event analytics &amp; engagement tracking</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Post-event reporting &amp; follow-up automation</li></ul></div>
+      </div>
+      <div class="svc-row flip" style="border-bottom:none">
+        <div class="svc-detail-col"><h3>What's included</h3><ul class="svc-list"><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Custom analytics dashboard setup</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Conversion &amp; goal tracking</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Customer behavior reporting</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Monthly performance insights</li><li><i class="ti ti-arrow-right" aria-hidden="true"></i>Data-led recommendations</li></ul></div>
+        <div class="svc-label-col"><div class="svc-num">06</div><div class="svc-name">Analytics &amp; reporting</div><div class="svc-short">Turn raw data into clear decisions with dashboards built for growth.</div></div>
+      </div>
+    </div>
+    <div class="cta-strip">
+      <h2>Not sure which service you need?</h2>
+      <p>Book a free audit — we'll map out exactly what will move the needle for your business.</p>
+      <button onclick="showPage('contact')">Talk to our team →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════ CONTACT ═══════════ -->
+  <div class="page" id="page-contact">
+    <section class="contact-hero">
+      <div class="pill">Get in touch</div>
+      <h1>Let's grow your<br>business <span class="accent">together</span></h1>
+      <p>Fill in the form and we'll get back to you within 24 hours. Or book a free audit directly — no commitment needed.</p>
+    </section>
+    <div class="contact-layout">
+      <div class="contact-info">
+        <h2>Contact details</h2>
+        <div class="info-item"><div class="info-icon"><i class="ti ti-mail" aria-hidden="true"></i></div><div><div class="info-lbl">Email</div><div class="info-val">hello@webxbeam.com</div></div></div>
+        <div class="info-item"><div class="info-icon"><i class="ti ti-phone" aria-hidden="true"></i></div><div><div class="info-lbl">Phone / WhatsApp</div><div class="info-val">+27 (0) 00 000 0000</div></div></div>
+        <div class="info-item"><div class="info-icon"><i class="ti ti-map-pin" aria-hidden="true"></i></div><div><div class="info-lbl">Location</div><div class="info-val">South Africa · Remote-first,<br>serving clients worldwide</div></div></div>
+        <div class="info-item"><div class="info-icon"><i class="ti ti-clock" aria-hidden="true"></i></div><div><div class="info-lbl">Response time</div><div class="info-val">Within 24 hours on business days</div></div></div>
+        <div class="audit-box">
+          <p>Skip the form — book a free 30-minute strategy call and we'll audit your digital presence live.</p>
+          <button>Book a free audit call →</button>
+        </div>
+      </div>
+      <div class="contact-form-col">
+        <h2>Send us a message</h2>
+        <div id="cform">
+          <div class="form-row">
+            <div class="form-group"><label>First name</label><input type="text" placeholder="John" id="ff" autocomplete="given-name"></div>
+            <div class="form-group"><label>Last name</label><input type="text" placeholder="Smith" autocomplete="family-name"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Email address</label><input type="email" placeholder="john@company.com" id="fe" autocomplete="email"></div>
+            <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" placeholder="+27 00 000 0000" autocomplete="tel"></div>
+          </div>
+          <div class="form-group"><label>Business name</label><input type="text" placeholder="Your company name" autocomplete="organization"></div>
+          <div class="form-group"><label>Industry</label>
+            <select style="background:#0d0d0d;color:#ccc">
+              <option value="" disabled selected style="color:#333">Select your industry…</option>
+              <option>Retail</option><option>Hospitality &amp; restaurants</option><option>Real estate</option><option>E-commerce</option><option>Professional services</option><option>Events &amp; entertainment</option><option>Medical &amp; healthcare</option><option>Startup</option><option>Other</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Services interested in</label>
+            <div class="services-check">
+              <label class="chk-item"><input type="checkbox"><span>Digital marketing</span></label>
+              <label class="chk-item"><input type="checkbox"><span>Website development</span></label>
+              <label class="chk-item"><input type="checkbox"><span>UI/UX &amp; heatmaps</span></label>
+              <label class="chk-item"><input type="checkbox"><span>AI automation</span></label>
+              <label class="chk-item"><input type="checkbox"><span>Event marketing</span></label>
+              <label class="chk-item"><input type="checkbox"><span>Analytics</span></label>
+            </div>
+          </div>
+          <div class="form-group"><label>Monthly budget</label>
+            <select style="background:#0d0d0d;color:#ccc">
+              <option value="" disabled selected style="color:#333">Select a budget range…</option>
+              <option>Under R5,000/mo</option><option>R5,000 – R10,000/mo</option><option>R10,000 – R20,000/mo</option><option>R20,000 – R50,000/mo</option><option>R50,000+/mo</option><option>Once-off project</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Tell us about your goals</label><textarea placeholder="What are you trying to achieve? Any specific challenges or deadlines?"></textarea></div>
+          <div class="submit-row">
+            <div class="submit-note">We reply within 24 hours.</div>
+            <button class="submit-btn" onclick="submitForm()">Send message <i class="ti ti-send" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="success-msg" id="smsg">
+          <i class="ti ti-circle-check" aria-hidden="true"></i>
+          <div class="sm-title">Message sent!</div>
+          <div class="sm-sub">The Web<span style="color:#801818">X</span>Beam team will be in touch within 24 hours.</div>
+        </div>
+      </div>
+    </div>
+    <div class="cta-strip">
+      <h2>Building digital growth that converts.</h2>
+      <p>Smart marketing. Smarter systems.</p>
+      <button onclick="showPage('home')">Back to home →</button>
+    </div>
+  </div>
+
+  <!-- SHARED FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">Web<span class="x">X</span>Beam</div>
+    <div class="footer-tagline">Smart marketing. Smarter systems.</div>
+    <div class="footer-links">
+      <span onclick="showPage('about')">About</span>
+      <span onclick="showPage('services')">Services</span>
+      <span onclick="showPage('contact')">Contact</span>
+    </div>
+  </footer>
+  <div class="powered">
+    <p>Powered by <span class="wx">Web</span><span class="xx">X</span><span class="xb">Beam</span> &nbsp;·&nbsp; &copy; 2025 All rights reserved.</p>
+  </div>
+
+</div>
+
+<script>
+function showPage(p){
+  document.querySelectorAll('.page').forEach(function(el){el.classList.remove('active');});
+  document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('active');});
+  document.querySelectorAll('.nav-links a').forEach(function(el){el.classList.remove('active');});
+  document.getElementById('page-'+p).classList.add('active');
+  document.getElementById('pt-'+p).classList.add('active');
+  document.getElementById('nl-'+p).classList.add('active');
+  if(window.scrollTo) window.scrollTo(0,0);
+  // Update document title per page
+  var titles = {home:'WebXBeam — Smart Marketing. Smarter Systems.',about:'About Us — WebXBeam',services:'Services — WebXBeam',contact:'Contact — WebXBeam'};
+  document.title = titles[p] || titles.home;
+}
+
+function submitForm(){
+  var f=document.getElementById('ff').value.trim();
+  var e=document.getElementById('fe').value.trim();
+  document.getElementById('ff').style.borderColor=f?'#222':'#801818';
+  document.getElementById('fe').style.borderColor=e?'#222':'#801818';
+  if(!f||!e)return;
+  document.getElementById('cform').style.display='none';
+  document.getElementById('smsg').style.display='block';
+}
+</script>
+
+</body>
+</html>
