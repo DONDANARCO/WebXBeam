@@ -779,6 +779,23 @@ function showFormSuccess(){
   document.getElementById('smsg').style.display='block';
 }
 
+function collectFormPayload(){
+  var services=[];
+  document.querySelectorAll('#cform input[name=services]:checked').forEach(function(el){services.push(el.value);});
+  return{
+    first_name:document.getElementById('ff').value.trim(),
+    last_name:document.getElementById('fl').value.trim(),
+    email:document.getElementById('fe').value.trim(),
+    phone:document.getElementById('fp').value.trim(),
+    business:document.getElementById('fb').value.trim(),
+    industry:document.getElementById('fi').value,
+    services:services,
+    budget:document.getElementById('fbd').value,
+    message:document.getElementById('fg').value.trim(),
+    _gotcha:document.querySelector('#cform input[name=_gotcha]').value
+  };
+}
+
 async function submitForm(e){
   if(e) e.preventDefault();
   var f=document.getElementById('ff').value.trim();
@@ -789,24 +806,23 @@ async function submitForm(e){
   var form=document.getElementById('cform');
   var fid=(form.getAttribute('data-formspree-id')||'').trim();
   var btn=document.getElementById('submit-btn');
+  btn.disabled=true;
+  btn.textContent='Sending…';
+  try{
+    var res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(collectFormPayload())});
+    if(res.ok){showFormSuccess();return;}
+  }catch(err){}
   if(fid){
-    btn.disabled=true;
-    btn.textContent='Sending…';
     try{
-      var res=await fetch('https://formspree.io/f/'+fid,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
-      if(!res.ok) throw new Error('send failed');
+      var res2=await fetch('https://formspree.io/f/'+fid,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
+      if(!res2.ok) throw new Error('send failed');
       showFormSuccess();
-    }catch(err){
-      alert('Could not send your message. Please email hello@webxbeam.com directly.');
-    }finally{
-      btn.disabled=false;
-      btn.innerHTML='Send message <i class="ti ti-send" aria-hidden="true"></i>';
-    }
-    return;
+      return;
+    }catch(err){}
   }
-  var body='Name: '+f+' '+(document.getElementById('fl').value||'')+'\nEmail: '+em+'\nPhone: '+(document.getElementById('fp').value||'')+'\nBusiness: '+(document.getElementById('fb').value||'')+'\nIndustry: '+(document.getElementById('fi').value||'')+'\nBudget: '+(document.getElementById('fbd').value||'')+'\n\n'+(document.getElementById('fg').value||'');
-  window.location.href='mailto:hello@webxbeam.com?subject='+encodeURIComponent('WebXBeam inquiry')+'&body='+encodeURIComponent(body);
-  showFormSuccess();
+  alert('Could not send your message. Please email hello@webxbeam.com directly.');
+  btn.disabled=false;
+  btn.innerHTML='Send message <i class="ti ti-send" aria-hidden="true"></i>';
 }
 
 document.getElementById('year').textContent=new Date().getFullYear();
