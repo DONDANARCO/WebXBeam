@@ -176,6 +176,8 @@
     .clients-lbl{font-size:10px;color:#333;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px}
     .clients-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
     .chip{background:#111;border:0.5px solid #1e1e1e;border-radius:6px;padding:8px 16px;font-size:11px;font-weight:600;color:#333;letter-spacing:0.5px}
+    .clients-logos{display:flex;gap:20px;justify-content:center;align-items:center;flex-wrap:wrap;margin-bottom:28px}
+    .clients-logos .client-logo{width:64px;height:64px}
 
     /* ══════════════════════════════
        SERVICES
@@ -241,7 +243,10 @@
     .client-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
     .client-card{background:#111;border:0.5px solid #1e1e1e;border-radius:12px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;transition:border-color 0.2s}
     .client-card:hover{border-color:#3a1515}
-    .client-monogram{width:48px;height:48px;border-radius:10px;background:#1a0808;border:0.5px solid #3a1515;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#801818;letter-spacing:-0.5px;flex-shrink:0}
+    .client-logo,.client-monogram{width:56px;height:56px;border-radius:10px;flex-shrink:0}
+    .client-logo{background:#fff;border:0.5px solid #2a2a2a;display:flex;align-items:center;justify-content:center;padding:8px;overflow:hidden}
+    .client-logo img{width:100%;height:100%;object-fit:contain;display:block}
+    .client-monogram{background:#1a0808;border:0.5px solid #3a1515;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#801818;letter-spacing:-0.5px}
     .client-name{font-size:14px;font-weight:800;color:#ddd;letter-spacing:-0.3px}
     .client-tag{display:inline-block;background:#141414;border:0.5px solid #2a2a2a;border-radius:20px;font-size:10px;color:#555;padding:4px 11px;letter-spacing:0.8px;text-transform:uppercase;width:fit-content}
 
@@ -495,28 +500,28 @@
       <div class="section-sub">From healthcare to agri-tech — we help ambitious businesses across industries grow smarter.</div>
       <div class="client-cards">
         <div class="client-card">
-          <div class="client-monogram">FM</div>
+          <div class="client-logo"><img src="assets/clients/foot-med.jpeg" alt="Foot Med Podiatrist Inc logo" width="56" height="56" loading="lazy"></div>
           <div>
             <div class="client-name">Foot Med Podiatrist Inc</div>
             <div class="client-tag">Healthcare &amp; medical</div>
           </div>
         </div>
         <div class="client-card">
-          <div class="client-monogram">AG</div>
+          <div class="client-logo"><img src="assets/clients/agriden.png" alt="Agriden logo" width="56" height="56" loading="lazy"></div>
           <div>
             <div class="client-name">Agriden</div>
             <div class="client-tag">Agriculture &amp; agri-tech</div>
           </div>
         </div>
         <div class="client-card">
-          <div class="client-monogram">AC</div>
+          <div class="client-monogram" aria-hidden="true">AC</div>
           <div>
             <div class="client-name">AgriCori</div>
             <div class="client-tag">Agriculture &amp; agri-tech</div>
           </div>
         </div>
         <div class="client-card">
-          <div class="client-monogram">SB</div>
+          <div class="client-logo"><img src="assets/clients/spaceboys.jpeg" alt="Spaceboys logo" width="56" height="56" loading="lazy"></div>
           <div>
             <div class="client-name">Spaceboys</div>
             <div class="client-tag">Record label</div>
@@ -570,7 +575,13 @@
       </div>
     </div>
     <div class="clients-bar">
-      <div class="clients-lbl">Industries we serve</div>
+      <div class="clients-lbl">Clients we serve</div>
+      <div class="clients-logos">
+        <div class="client-logo"><img src="assets/clients/foot-med.jpeg" alt="Foot Med Podiatrist Inc" width="64" height="64" loading="lazy"></div>
+        <div class="client-logo"><img src="assets/clients/agriden.png" alt="Agriden" width="64" height="64" loading="lazy"></div>
+        <div class="client-logo"><img src="assets/clients/spaceboys.jpeg" alt="Spaceboys" width="64" height="64" loading="lazy"></div>
+      </div>
+      <div class="clients-lbl" style="margin-top:8px">Industries we serve</div>
       <div class="clients-row">
         <div class="chip">Retail</div><div class="chip">Hospitality</div><div class="chip">Real estate</div><div class="chip">E-commerce</div><div class="chip">Professional services</div><div class="chip">Events</div><div class="chip">Medical</div><div class="chip">Startups</div>
       </div>
