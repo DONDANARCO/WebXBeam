@@ -14,7 +14,10 @@
   <meta property="og:url" content="https://webxbeam.com/">
   <meta property="og:title" content="WebXBeam — Smart Marketing. Smarter Systems.">
   <meta property="og:description" content="Digital marketing and AI automation agency helping businesses attract customers, increase conversions, and run smarter.">
-  <meta property="og:image" content="https://webxbeam.com/og-image.png">
+  <meta property="og:image" content="https://webxbeam.com/og-image.svg">
+  <meta property="og:image:type" content="image/svg+xml">
+  <meta property="og:site_name" content="WebXBeam">
+  <meta name="theme-color" content="#801818">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -48,6 +51,13 @@
     .nav-links a:hover{color:#fff}
     .nav-links a.active{color:#fff}
     .nav-cta{background:#801818;color:#fff;border:none;padding:9px 22px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:0.2px}
+    .nav-toggle{display:none;background:transparent;border:0.5px solid #2a2a2a;color:#fff;width:40px;height:40px;border-radius:8px;cursor:pointer;font-size:20px;align-items:center;justify-content:center}
+    .nav-toggle[aria-expanded=true]{border-color:#801818;color:#801818}
+    .nav-mobile{display:none;flex-direction:column;gap:4px;padding:12px 20px 16px;border-bottom:0.5px solid #1e1e1e;background:#0d0d0d}
+    .nav-mobile.open{display:flex}
+    .nav-mobile a{color:#777;text-decoration:none;font-size:14px;padding:10px 0;border-bottom:0.5px solid #151515;cursor:pointer}
+    .nav-mobile a:last-child{border-bottom:none}
+    .nav-mobile a:hover,.nav-mobile a.active{color:#fff}
 
     /* TAB BAR */
     .tab-bar{display:flex;border-bottom:0.5px solid #1e1e1e;background:#0d0d0d;padding:0 40px}
@@ -228,7 +238,7 @@
        HOME CLIENTS
     ══════════════════════════════ */
     .home-clients{padding:72px 40px;border-bottom:0.5px solid #1a1a1a;background:#0a0a0a}
-    .client-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+    .client-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
     .client-card{background:#111;border:0.5px solid #1e1e1e;border-radius:12px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;transition:border-color 0.2s}
     .client-card:hover{border-color:#3a1515}
     .client-monogram{width:48px;height:48px;border-radius:10px;background:#1a0808;border:0.5px solid #3a1515;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#801818;letter-spacing:-0.5px;flex-shrink:0}
@@ -241,6 +251,8 @@
     @media (max-width: 768px) {
       .nav{padding:14px 20px}
       .nav-links{display:none}
+      .nav-toggle{display:flex}
+      .nav-cta{display:none}
       .tab-bar{padding:0 20px;overflow-x:auto;-webkit-overflow-scrolling:touch}
       .tab{white-space:nowrap;padding:12px 14px;font-size:11px}
       .hero{padding:60px 20px 48px}
@@ -285,22 +297,29 @@
 <div class="site">
 
   <!-- NAV -->
-  <nav class="nav">
-    <div class="nav-logo" onclick="showPage('home')">Web<span class="x">X</span>Beam</div>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-logo" role="button" tabindex="0" onclick="showPage('home')" onkeydown="if(event.key==='Enter')showPage('home')">Web<span class="x">X</span>Beam</div>
     <div class="nav-links">
-      <a onclick="showPage('home')" id="nl-home" class="active">Home</a>
-      <a onclick="showPage('about')" id="nl-about">About</a>
-      <a onclick="showPage('services')" id="nl-services">Services</a>
-      <a onclick="showPage('contact')" id="nl-contact">Contact</a>
+      <a href="/" onclick="return navClick(event,'home')" id="nl-home" class="active">Home</a>
+      <a href="/about" onclick="return navClick(event,'about')" id="nl-about">About</a>
+      <a href="/services" onclick="return navClick(event,'services')" id="nl-services">Services</a>
+      <a href="/contact" onclick="return navClick(event,'contact')" id="nl-contact">Contact</a>
     </div>
-    <button class="nav-cta" onclick="showPage('contact')">Free audit ↗</button>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile"><i class="ti ti-menu-2" aria-hidden="true"></i></button>
+    <button type="button" class="nav-cta" onclick="showPage('contact')">Free audit ↗</button>
   </nav>
+  <div class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
+    <a href="/" onclick="return navClick(event,'home')" id="nm-home" class="active">Home</a>
+    <a href="/about" onclick="return navClick(event,'about')" id="nm-about">About</a>
+    <a href="/services" onclick="return navClick(event,'services')" id="nm-services">Services</a>
+    <a href="/contact" onclick="return navClick(event,'contact')" id="nm-contact">Contact &amp; booking</a>
+  </div>
 
-  <div class="tab-bar">
-    <div class="tab active" onclick="showPage('home')" id="pt-home">Home</div>
-    <div class="tab" onclick="showPage('about')" id="pt-about">About us</div>
-    <div class="tab" onclick="showPage('services')" id="pt-services">Services</div>
-    <div class="tab" onclick="showPage('contact')" id="pt-contact">Contact &amp; booking</div>
+  <div class="tab-bar" role="tablist" aria-label="Site sections">
+    <div class="tab active" role="tab" onclick="showPage('home')" id="pt-home">Home</div>
+    <div class="tab" role="tab" onclick="showPage('about')" id="pt-about">About us</div>
+    <div class="tab" role="tab" onclick="showPage('services')" id="pt-services">Services</div>
+    <div class="tab" role="tab" onclick="showPage('contact')" id="pt-contact">Contact &amp; booking</div>
   </div>
 
   <!-- ═══════════ HOME ═══════════ -->
@@ -496,6 +515,13 @@
             <div class="client-tag">Agriculture &amp; agri-tech</div>
           </div>
         </div>
+        <div class="client-card">
+          <div class="client-monogram">SB</div>
+          <div>
+            <div class="client-name">Spaceboys</div>
+            <div class="client-tag">Record label</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -607,54 +633,55 @@
       <div class="contact-info">
         <h2>Contact details</h2>
         <div class="info-item"><div class="info-icon"><i class="ti ti-mail" aria-hidden="true"></i></div><div><div class="info-lbl">Email</div><div class="info-val">hello@webxbeam.com</div></div></div>
-        <div class="info-item"><div class="info-icon"><i class="ti ti-phone" aria-hidden="true"></i></div><div><div class="info-lbl">Phone / WhatsApp</div><div class="info-val">+27 (0) 00 000 0000</div></div></div>
+        <div class="info-item"><div class="info-icon"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i></div><div><div class="info-lbl">WhatsApp</div><div class="info-val" id="whatsapp-line">Configure your number in index.html</div></div></div>
         <div class="info-item"><div class="info-icon"><i class="ti ti-map-pin" aria-hidden="true"></i></div><div><div class="info-lbl">Location</div><div class="info-val">South Africa · Remote-first,<br>serving clients worldwide</div></div></div>
         <div class="info-item"><div class="info-icon"><i class="ti ti-clock" aria-hidden="true"></i></div><div><div class="info-lbl">Response time</div><div class="info-val">Within 24 hours on business days</div></div></div>
         <div class="audit-box">
           <p>Skip the form — book a free 30-minute strategy call and we'll audit your digital presence live.</p>
-          <button>Book a free audit call →</button>
+          <button type="button" onclick="showPage('contact')">Book a free audit call →</button>
         </div>
       </div>
       <div class="contact-form-col">
         <h2>Send us a message</h2>
-        <div id="cform">
+        <form id="cform" data-formspree-id="" novalidate>
           <div class="form-row">
-            <div class="form-group"><label>First name</label><input type="text" placeholder="John" id="ff" autocomplete="given-name"></div>
-            <div class="form-group"><label>Last name</label><input type="text" placeholder="Smith" autocomplete="family-name"></div>
+            <div class="form-group"><label for="ff">First name</label><input type="text" name="first_name" placeholder="John" id="ff" required autocomplete="given-name"></div>
+            <div class="form-group"><label for="fl">Last name</label><input type="text" name="last_name" placeholder="Smith" id="fl" autocomplete="family-name"></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label>Email address</label><input type="email" placeholder="john@company.com" id="fe" autocomplete="email"></div>
-            <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" placeholder="+27 00 000 0000" autocomplete="tel"></div>
+            <div class="form-group"><label for="fe">Email address</label><input type="email" name="email" placeholder="john@company.com" id="fe" required autocomplete="email"></div>
+            <div class="form-group"><label for="fp">Phone / WhatsApp</label><input type="tel" name="phone" placeholder="+27 00 000 0000" id="fp" autocomplete="tel"></div>
           </div>
-          <div class="form-group"><label>Business name</label><input type="text" placeholder="Your company name" autocomplete="organization"></div>
-          <div class="form-group"><label>Industry</label>
-            <select style="background:#0d0d0d;color:#ccc">
+          <div class="form-group"><label for="fb">Business name</label><input type="text" name="business" placeholder="Your company name" id="fb" autocomplete="organization"></div>
+          <div class="form-group"><label for="fi">Industry</label>
+            <select id="fi" name="industry" style="background:#0d0d0d;color:#ccc">
               <option value="" disabled selected style="color:#333">Select your industry…</option>
               <option>Retail</option><option>Hospitality &amp; restaurants</option><option>Real estate</option><option>E-commerce</option><option>Professional services</option><option>Events &amp; entertainment</option><option>Medical &amp; healthcare</option><option>Startup</option><option>Other</option>
             </select>
           </div>
           <div class="form-group"><label>Services interested in</label>
             <div class="services-check">
-              <label class="chk-item"><input type="checkbox"><span>Digital marketing</span></label>
-              <label class="chk-item"><input type="checkbox"><span>Website development</span></label>
-              <label class="chk-item"><input type="checkbox"><span>UI/UX &amp; heatmaps</span></label>
-              <label class="chk-item"><input type="checkbox"><span>AI automation</span></label>
-              <label class="chk-item"><input type="checkbox"><span>Event marketing</span></label>
-              <label class="chk-item"><input type="checkbox"><span>Analytics</span></label>
+              <label class="chk-item"><input type="checkbox" name="services" value="Digital marketing"><span>Digital marketing</span></label>
+              <label class="chk-item"><input type="checkbox" name="services" value="Website development"><span>Website development</span></label>
+              <label class="chk-item"><input type="checkbox" name="services" value="UI/UX & heatmaps"><span>UI/UX &amp; heatmaps</span></label>
+              <label class="chk-item"><input type="checkbox" name="services" value="AI automation"><span>AI automation</span></label>
+              <label class="chk-item"><input type="checkbox" name="services" value="Event marketing"><span>Event marketing</span></label>
+              <label class="chk-item"><input type="checkbox" name="services" value="Analytics"><span>Analytics</span></label>
             </div>
           </div>
-          <div class="form-group"><label>Monthly budget</label>
-            <select style="background:#0d0d0d;color:#ccc">
+          <div class="form-group"><label for="fbd">Monthly budget</label>
+            <select id="fbd" name="budget" style="background:#0d0d0d;color:#ccc">
               <option value="" disabled selected style="color:#333">Select a budget range…</option>
               <option>Under R5,000/mo</option><option>R5,000 – R10,000/mo</option><option>R10,000 – R20,000/mo</option><option>R20,000 – R50,000/mo</option><option>R50,000+/mo</option><option>Once-off project</option>
             </select>
           </div>
-          <div class="form-group"><label>Tell us about your goals</label><textarea placeholder="What are you trying to achieve? Any specific challenges or deadlines?"></textarea></div>
+          <div class="form-group"><label for="fg">Tell us about your goals</label><textarea id="fg" name="message" placeholder="What are you trying to achieve? Any specific challenges or deadlines?"></textarea></div>
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <div class="submit-row">
             <div class="submit-note">We reply within 24 hours.</div>
-            <button class="submit-btn" onclick="submitForm()">Send message <i class="ti ti-send" aria-hidden="true"></i></button>
+            <button type="submit" class="submit-btn" id="submit-btn">Send message <i class="ti ti-send" aria-hidden="true"></i></button>
           </div>
-        </div>
+        </form>
         <div class="success-msg" id="smsg">
           <i class="ti ti-circle-check" aria-hidden="true"></i>
           <div class="sm-title">Message sent!</div>
@@ -680,34 +707,107 @@
     </div>
   </footer>
   <div class="powered">
-    <p>Powered by <span class="wx">Web</span><span class="xx">X</span><span class="xb">Beam</span> &nbsp;·&nbsp; &copy; 2025 All rights reserved.</p>
+    <p>Powered by <span class="wx">Web</span><span class="xx">X</span><span class="xb">Beam</span> &nbsp;·&nbsp; &copy; <span id="year"></span> All rights reserved.</p>
   </div>
 
 </div>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "WebXBeam",
+  "url": "https://webxbeam.com",
+  "email": "hello@webxbeam.com",
+  "description": "Digital marketing and AI automation agency helping businesses scale smarter.",
+  "slogan": "Smart marketing. Smarter systems."
+}
+</script>
 <script>
-function showPage(p){
-  document.querySelectorAll('.page').forEach(function(el){el.classList.remove('active');});
-  document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('active');});
-  document.querySelectorAll('.nav-links a').forEach(function(el){el.classList.remove('active');});
-  document.getElementById('page-'+p).classList.add('active');
-  document.getElementById('pt-'+p).classList.add('active');
-  document.getElementById('nl-'+p).classList.add('active');
-  if(window.scrollTo) window.scrollTo(0,0);
-  // Update document title per page
-  var titles = {home:'WebXBeam — Smart Marketing. Smarter Systems.',about:'About Us — WebXBeam',services:'Services — WebXBeam',contact:'Contact — WebXBeam'};
-  document.title = titles[p] || titles.home;
+var ROUTES = {home:'/',about:'/about',services:'/services',contact:'/contact'};
+var PATH_TO_PAGE = {'/':'home','/about':'about','/services':'services','/contact':'contact'};
+
+function navClick(e,p){
+  if(e&&e.preventDefault) e.preventDefault();
+  showPage(p,true);
+  return false;
 }
 
-function submitForm(){
-  var f=document.getElementById('ff').value.trim();
-  var e=document.getElementById('fe').value.trim();
-  document.getElementById('ff').style.borderColor=f?'#222':'#801818';
-  document.getElementById('fe').style.borderColor=e?'#222':'#801818';
-  if(!f||!e)return;
+function closeMobileNav(){
+  var m=document.getElementById('nav-mobile');
+  var t=document.getElementById('nav-toggle');
+  if(m) m.classList.remove('open');
+  if(t){t.setAttribute('aria-expanded','false');t.innerHTML='<i class="ti ti-menu-2" aria-hidden="true"></i>';}
+}
+
+function showPage(p,push){
+  if(!document.getElementById('page-'+p)) p='home';
+  document.querySelectorAll('.page').forEach(function(el){el.classList.remove('active');});
+  document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('active');});
+  document.querySelectorAll('.nav-links a,.nav-mobile a').forEach(function(el){el.classList.remove('active');});
+  document.getElementById('page-'+p).classList.add('active');
+  document.getElementById('pt-'+p).classList.add('active');
+  var nl=document.getElementById('nl-'+p); if(nl) nl.classList.add('active');
+  var nm=document.getElementById('nm-'+p); if(nm) nm.classList.add('active');
+  if(push!==false&&window.history&&ROUTES[p]){
+    history.pushState({page:p},'',ROUTES[p]);
+  }
+  closeMobileNav();
+  window.scrollTo(0,0);
+  var titles={home:'WebXBeam — Smart Marketing. Smarter Systems.',about:'About Us — WebXBeam',services:'Services — WebXBeam',contact:'Contact — WebXBeam'};
+  document.title=titles[p]||titles.home;
+}
+
+function pageFromPath(){
+  var path=(location.pathname||'/').replace(/\/+$/,'')||'/';
+  return PATH_TO_PAGE[path]||'home';
+}
+
+function showFormSuccess(){
   document.getElementById('cform').style.display='none';
   document.getElementById('smsg').style.display='block';
 }
+
+async function submitForm(e){
+  if(e) e.preventDefault();
+  var f=document.getElementById('ff').value.trim();
+  var em=document.getElementById('fe').value.trim();
+  document.getElementById('ff').style.borderColor=f?'#222':'#801818';
+  document.getElementById('fe').style.borderColor=em?'#222':'#801818';
+  if(!f||!em) return;
+  var form=document.getElementById('cform');
+  var fid=(form.getAttribute('data-formspree-id')||'').trim();
+  var btn=document.getElementById('submit-btn');
+  if(fid){
+    btn.disabled=true;
+    btn.textContent='Sending…';
+    try{
+      var res=await fetch('https://formspree.io/f/'+fid,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
+      if(!res.ok) throw new Error('send failed');
+      showFormSuccess();
+    }catch(err){
+      alert('Could not send your message. Please email hello@webxbeam.com directly.');
+    }finally{
+      btn.disabled=false;
+      btn.innerHTML='Send message <i class="ti ti-send" aria-hidden="true"></i>';
+    }
+    return;
+  }
+  var body='Name: '+f+' '+(document.getElementById('fl').value||'')+'\nEmail: '+em+'\nPhone: '+(document.getElementById('fp').value||'')+'\nBusiness: '+(document.getElementById('fb').value||'')+'\nIndustry: '+(document.getElementById('fi').value||'')+'\nBudget: '+(document.getElementById('fbd').value||'')+'\n\n'+(document.getElementById('fg').value||'');
+  window.location.href='mailto:hello@webxbeam.com?subject='+encodeURIComponent('WebXBeam inquiry')+'&body='+encodeURIComponent(body);
+  showFormSuccess();
+}
+
+document.getElementById('year').textContent=new Date().getFullYear();
+document.getElementById('cform').addEventListener('submit',submitForm);
+document.getElementById('nav-toggle').addEventListener('click',function(){
+  var m=document.getElementById('nav-mobile');
+  var open=m.classList.toggle('open');
+  this.setAttribute('aria-expanded',open?'true':'false');
+  this.innerHTML=open?'<i class="ti ti-x" aria-hidden="true"></i>':'<i class="ti ti-menu-2" aria-hidden="true"></i>';
+});
+window.addEventListener('popstate',function(){showPage(pageFromPath(),false);});
+showPage(pageFromPath(),false);
 </script>
 
 </body>

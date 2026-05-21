@@ -1,52 +1,67 @@
-# WebXBeam — Vercel Deployment
+# WebXBeam
+
+Marketing site for **WebXBeam** — digital marketing, web development, and AI automation.
 
 ## Project structure
 
 ```
-webxbeam/
-├── index.html      ← Full site (all 4 pages as a SPA)
-├── 404.html        ← Custom 404 that redirects to home
-├── vercel.json     ← Routing, headers, caching config
+WebXBeam/
+├── index.html      # Full site (Home, About, Services, Contact)
+├── 404.html        # Branded 404 with redirect home
+├── vercel.json     # Clean URLs, security headers, SPA routes
+├── og-image.svg    # Social preview image (export PNG for best compatibility)
+├── robots.txt
+├── sitemap.xml
 └── README.md
 ```
 
 ## Deploy to Vercel
 
-### Option A — Vercel CLI (fastest)
+### Option A — Vercel CLI
 
 ```bash
 npm i -g vercel
-cd webxbeam
+cd WebXBeam
 vercel
 ```
 
-Follow the prompts. On subsequent deploys: `vercel --prod`
+Production: `vercel --prod`
 
-### Option B — Vercel Dashboard (drag & drop)
+### Option B — Git (recommended)
 
-1. Go to [vercel.com/new](https://vercel.com/new)
-2. Drag the entire `webxbeam/` folder onto the import area
-3. Click **Deploy** — no build settings needed (static site)
+1. Push this repo to GitHub/GitLab/Bitbucket
+2. Import at [vercel.com/new](https://vercel.com/new)
+3. **Framework preset:** Other
+4. **Build command:** (leave empty)
+5. **Output directory:** `./`
+6. Deploy — every push to `main` redeploys
 
-### Option C — Git (recommended for ongoing updates)
+### Option C — Drag and drop
 
-1. Push this folder to a GitHub/GitLab/Bitbucket repo
-2. Import the repo in the Vercel dashboard
-3. Framework preset: **Other** (no build command, output dir: `./`)
-4. Every push to `main` auto-deploys
+Import the project folder at [vercel.com/new](https://vercel.com/new) (no build step required).
 
-## What's configured
+## Routes
 
-- **Clean URLs** — `/index.html` served at `/`
-- **SPA rewrites** — all routes fall through to `index.html`
-- **Security headers** — X-Frame-Options, XSS Protection, Content-Type sniffing prevention
-- **Asset caching** — fonts, CSS, JS, images cached for 1 year; HTML always revalidated
-- **Custom 404** — branded page with auto-redirect to home
+| URL | Page |
+|-----|------|
+| `/` | Home |
+| `/about` | About |
+| `/services` | Services |
+| `/contact` | Contact |
+
+Vercel rewrites serve `index.html` for section URLs; client-side routing handles the rest.
 
 ## Before going live
 
-- [ ] Update `og:url` and `og:image` in `<head>` with your real domain
-- [ ] Add your real phone number in the Contact section
-- [ ] Add a real `og-image.png` (1200×630px) to the root folder
-- [ ] Wire up the contact form to a backend (Formspree, Netlify Forms, or custom API)
-- [ ] Set your custom domain in Vercel → Project Settings → Domains
+1. **Domain** — Add `webxbeam.com` in Vercel → Project → Domains; update `og:url`, canonical, and `sitemap.xml` if the domain differs.
+2. **Phone** — Replace the contact phone placeholder in `index.html`.
+3. **Contact form** — Create a [Formspree](https://formspree.io) form and set `data-formspree-id="your_form_id"` on `#cform`. Without it, submit opens a `mailto:` draft.
+4. **OG image** — For LinkedIn/Facebook, export `og-image.svg` to `og-image.png` (1200×630) and update the `og:image` meta tag.
+
+## Local preview
+
+```bash
+npx serve .
+```
+
+Open http://localhost:3000
