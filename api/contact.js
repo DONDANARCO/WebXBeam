@@ -1,5 +1,6 @@
 const { PutCommand } = require("@aws-sdk/lib-dynamodb");
 const { getConfig, getDocClient } = require("../lib/db");
+const { isPgConfigured, getPool } = require("../lib/pg");
 
 function json(res, status, body) {
   res.statusCode = status;
@@ -48,37 +49,69 @@ module.exports = async function handler(req, res) {
       return json(res, 400, { error: "First name and email are required" });
     }
 
-    const { tableName, partitionKey, sortKey } = getConfig();
-    if (!tableName) {
-      return json(res, 500, { error: "DynamoDB table not configured" });
-    }
-
     const createdAt = new Date().toISOString();
     const id = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+    const lastName = (body.last_name || "").trim();
+    const phone = (body.phone || "").trim();
+    const business = (body.business || "").trim();
+    const industry = body.industry || "";
+    const services = Array.isArray(body.services) ? body.services : [];
+    const budget = body.budget || "";
+    const message = (body.message || "").trim();
 
-    const item = {
-      [partitionKey]: "CONTACT",
-      [sortKey]: `${createdAt}#${id}`,
-      id,
-      createdAt,
-      source: "webxbeam.com",
-      first_name: firstName,
-      last_name: (body.last_name || "").trim(),
-      email,
-      phone: (body.phone || "").trim(),
-      business: (body.business || "").trim(),
-      industry: body.industry || "",
-      services: Array.isArray(body.services) ? body.services : [],
-      budget: body.budget || "",
-      message: (body.message || "").trim(),
-    };
+    if (isPgConfigured()) {
+      await getPool().query(
+        `INSERT INTO contact_submissions (
+          id, created_at, source, first_name, last_name, email,
+          phone, business, industry, services, budget, message
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10::jsonb, $11, $12)`,
+        [
+          id,
+          createdAt,
+          "webxbeam.com",
+          firstName,
+          lastName,
+          email,
+          phone,
+          business,
+          industry,
+          JSON.stringify(services),
+          budget,
+          message,
+        ]
+      );
+    } else {
+      const { tableName, partitionKey, sortKey } = getConfig();
+      if (!tableName) {
+        return json(res, 500, {
+          error: "Database not configured (Postgres or DynamoDB)",
+        });
+      }
 
-    await getDocClient().send(
-      new PutCommand({
-        TableName: tableName,
-        Item: item,
-      })
-    );
+      const item = {
+        [partitionKey]: "CONTACT",
+        [sortKey]: `${createdAt}#${id}`,
+        id,
+        createdAt,
+        source: "webxbeam.com",
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        phone,
+        business,
+        industry,
+        services,
+        budget,
+        message,
+      };
+
+      await getDocClient().send(
+        new PutCommand({
+          TableName: tableName,
+          Item: item,
+        })
+      );
+    }
 
     return json(res, 201, { ok: true, id });
   } catch (err) {

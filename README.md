@@ -51,26 +51,30 @@ Import the project folder at [vercel.com/new](https://vercel.com/new) (no build 
 
 Vercel rewrites serve `index.html` for section URLs; client-side routing handles the rest.
 
-## DynamoDB contact form (Vercel OIDC)
+## Contact form storage (Vercel OIDC)
 
-The contact form saves submissions to DynamoDB via `/api/contact` using Vercel OIDC — no AWS keys in code.
+The contact form saves via `/api/contact` using Vercel OIDC — no AWS access keys in code.
 
-1. Connect the **DynamoDB** integration to this Vercel project.
-2. Pull env vars locally: `vercel env pull .env.local`
-3. Install deps: `npm install`
-4. Deploy — form posts to `/api/contact` with `PK: CONTACT` and `SK: {timestamp}#{id}`.
+**Postgres (Aurora/RDS)** — used when `PGHOST` is set:
 
-Env vars (either naming works):
+1. Connect **Amazon Aurora PostgreSQL** on the [Vercel Marketplace](https://vercel.com/marketplace).
+2. Link the project and pull env: `vercel link` → `vercel env pull .env.local`
+3. Create the table: `npm run db:init` (or run `scripts/init-contact-table.sql` in AWS Query Editor)
+4. `npm install` and deploy
+
+**DynamoDB** — fallback when `PGHOST` is not set but `DYNAMODB_TABLE_NAME` is:
+
+1. Connect the **DynamoDB** integration.
+2. Deploy — items use `PK: CONTACT` and `SK: {timestamp}#{id}`.
 
 | Standard | Integration-prefixed |
 |----------|----------------------|
 | `AWS_REGION` | `SPACEKAYSONKELLY_AWS_REGION` |
 | `AWS_ROLE_ARN` | `SPACEKAYSONKELLY_AWS_ROLE_ARN` |
+| `PGHOST`, `PGPORT`, `PGUSER`, `PGDATABASE` | (often auto-set by integration) |
 | `DYNAMODB_TABLE_NAME` | `SPACEKAYSONKELLY_DYNAMODB_TABLE_NAME` |
-| `DYNAMODB_TABLE_PARTITION_KEY` | `SPACEKAYSONKELLY_DYNAMODB_TABLE_PARTITION_KEY` |
-| `DYNAMODB_TABLE_SORT_KEY` | `SPACEKAYSONKELLY_DYNAMODB_TABLE_SORT_KEY` |
 
-See `.env.example` for a template.
+See `.env.example` and `lib/pg.js` for the RDS IAM pool pattern.
 
 ## Before going live
 
