@@ -138,13 +138,14 @@
     .quote-attr{font-size:13px;color:#444}
 
     .home-pricing{padding:72px 40px;border-bottom:0.5px solid #1a1a1a}
-    .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+    .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:40px}
     .plan{background:#0d0d0d;border:0.5px solid #222;border-radius:12px;padding:28px 24px}
     .plan.feat{border-color:#801818;background:#120808}
     .plan-badge{font-size:10px;background:#801818;color:#fff;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px}
     .plan-name{font-size:15px;font-weight:800;color:#fff;margin-bottom:4px}
     .plan-price{font-size:30px;font-weight:900;color:#fff;letter-spacing:-1px;margin:12px 0 4px}
     .plan-price span{font-size:13px;font-weight:400;color:#444}
+    .plan-note{font-size:11px;color:#555;line-height:1.4;margin-bottom:12px}
     .plan-desc{font-size:12px;color:#444;margin-bottom:20px;line-height:1.5}
     .plan-feat{display:flex;align-items:center;gap:8px;font-size:12px;color:#666;margin-bottom:10px}
     .plan-feat i{color:#801818;font-size:13px}
@@ -458,13 +459,14 @@
     <section class="home-pricing">
       <div class="section-label">Pricing</div>
       <div class="section-title">Simple, transparent plans</div>
-      <div class="section-sub">All plans include a free digital audit. No lock-in contracts.</div>
+      <div class="section-sub">Once-off build fees. Domain &amp; hosting from R100/mo (subject to increase). Free digital audit on all plans.</div>
       <div class="plans">
         <div class="plan">
           <div class="plan-name">Starter</div>
-          <div class="plan-price">R4,999<span>/mo</span></div>
+          <div class="plan-price">R2,500<span> once off</span></div>
+          <div class="plan-note">+ R100/mo domain &amp; hosting (subject to increase)</div>
           <div class="plan-desc">For small businesses building their digital foundation.</div>
-          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Basic business website</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Basic business landing page</div>
           <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Social media setup</div>
           <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> SEO basics</div>
           <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Lead form integration</div>
@@ -473,22 +475,44 @@
         <div class="plan feat">
           <div class="plan-badge">Most popular</div>
           <div class="plan-name">Business Growth</div>
-          <div class="plan-price">R12,999<span>/mo</span></div>
-          <div class="plan-desc">For growing businesses scaling leads and conversions.</div>
-          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Custom website</div>
-          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Paid ad campaigns</div>
-          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Heatmaps &amp; analytics</div>
-          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Conversion optimization</div>
+          <div class="plan-price">R4,999<span> once off</span></div>
+          <div class="plan-note">+ R100/mo domain &amp; hosting (subject to increase)</div>
+          <div class="plan-desc">For small businesses growing their digital foundation.</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Basic business website</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Social media setup</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> SEO</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Lead form integration</div>
           <button class="plan-btn" onclick="showPage('contact')">Get started</button>
         </div>
         <div class="plan">
           <div class="plan-name">Enterprise</div>
-          <div class="plan-price">Custom</div>
+          <div class="plan-price">R12,999<span> once off</span></div>
+          <div class="plan-note">+ R100/mo domain &amp; hosting (subject to increase)</div>
+          <div class="plan-desc">For growing businesses scaling leads and conversions.</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Custom website / website redesign</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Paid ad campaigns (Google, social media)</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Heatmaps &amp; analytics</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Conversion optimization</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Social media setup</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> SEO optimization</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Lead form integration</div>
+          <button class="plan-btn" onclick="showPage('contact')">Get started</button>
+        </div>
+        <div class="plan">
+          <div class="plan-name">Custom</div>
+          <div class="plan-price">You name it</div>
           <div class="plan-desc">Full digital ecosystem with AI automation and ongoing support.</div>
           <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Full digital strategy</div>
           <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> AI workflow automation</div>
           <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> CRM integration</div>
           <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Advanced dashboards</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Custom website / website redesign</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Paid ad campaigns (Google, social media)</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Heatmaps &amp; analytics</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Conversion optimization</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Social media setup</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> SEO optimization</div>
+          <div class="plan-feat"><i class="ti ti-check" aria-hidden="true"></i> Lead form integration</div>
           <button class="plan-btn" onclick="showPage('contact')">Talk to us</button>
         </div>
       </div>
