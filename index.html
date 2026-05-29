@@ -241,7 +241,7 @@
        HOME CLIENTS
     ══════════════════════════════ */
     .home-clients{padding:72px 40px;border-bottom:0.5px solid #1a1a1a;background:#0a0a0a}
-    .client-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+    .client-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:40px}
     .client-card{background:#111;border:0.5px solid #1e1e1e;border-radius:12px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;transition:border-color 0.2s}
     .client-card:hover{border-color:#3a1515}
     .client-logo,.client-monogram{width:56px;height:56px;border-radius:10px;flex-shrink:0}
@@ -521,7 +521,7 @@
     <section class="home-clients">
       <div class="section-label">Clients we serve</div>
       <div class="section-title">Trusted by growing businesses</div>
-      <div class="section-sub">From healthcare to agri-tech — we help ambitious businesses across industries grow smarter.</div>
+      <div class="section-sub">From healthcare and agri-tech to smart home and entertainment — we help ambitious businesses across industries grow smarter.</div>
       <div class="client-cards">
         <div class="client-card">
           <div class="client-logo"><img src="assets/clients/foot-med.jpeg" alt="Foot Med Podiatrist Inc logo" width="56" height="56" loading="lazy"></div>
@@ -538,10 +538,17 @@
           </div>
         </div>
         <div class="client-card">
-          <div class="client-monogram" aria-hidden="true">AC</div>
+          <div class="client-logo"><img src="assets/clients/Agricori.png" alt="AgriCori logo" width="56" height="56" loading="lazy"></div>
           <div>
             <div class="client-name">AgriCori</div>
             <div class="client-tag">Agriculture &amp; agri-tech</div>
+          </div>
+        </div>
+        <div class="client-card">
+          <div class="client-logo"><img src="assets/clients/Afrihaus.png" alt="Afrihaus logo" width="56" height="56" loading="lazy"></div>
+          <div>
+            <div class="client-name">Afrihaus</div>
+            <div class="client-tag">Smart home installation</div>
           </div>
         </div>
         <div class="client-card">
@@ -603,11 +610,13 @@
       <div class="clients-logos">
         <div class="client-logo"><img src="assets/clients/foot-med.jpeg" alt="Foot Med Podiatrist Inc" width="64" height="64" loading="lazy"></div>
         <div class="client-logo"><img src="assets/clients/agriden.png" alt="Agriden" width="64" height="64" loading="lazy"></div>
+        <div class="client-logo"><img src="assets/clients/Agricori.png" alt="AgriCori" width="64" height="64" loading="lazy"></div>
+        <div class="client-logo"><img src="assets/clients/Afrihaus.png" alt="Afrihaus" width="64" height="64" loading="lazy"></div>
         <div class="client-logo"><img src="assets/clients/spaceboys.jpeg" alt="Spaceboys" width="64" height="64" loading="lazy"></div>
       </div>
       <div class="clients-lbl" style="margin-top:8px">Industries we serve</div>
       <div class="clients-row">
-        <div class="chip">Retail</div><div class="chip">Hospitality</div><div class="chip">Real estate</div><div class="chip">E-commerce</div><div class="chip">Professional services</div><div class="chip">Events</div><div class="chip">Medical</div><div class="chip">Startups</div>
+        <div class="chip">Retail</div><div class="chip">Hospitality</div><div class="chip">Real estate</div><div class="chip">E-commerce</div><div class="chip">Smart home</div><div class="chip">Professional services</div><div class="chip">Events</div><div class="chip">Medical</div><div class="chip">Startups</div>
       </div>
     </div>
     <div class="cta-strip">
